@@ -7,9 +7,13 @@ let passwordholder = document.getElementById("generatedPassword");
 let userdigits = document.getElementById("userDigits");
 let password = [];
 const generatePassword = document.getElementById("submitPassword");
+let backButton = document.createElement("button");
 
 
 generatePassword.addEventListener("click", function () {
+    userChoice.length = 0;
+    password.length = 0;
+    passwordholder.textContent = '';
     const minusculas = document.getElementById("minusculas");
     const mayusculas = document.getElementById("mayusculas");
     const numeros = document.getElementById("numeros");
@@ -40,14 +44,23 @@ generatePassword.addEventListener("click", function () {
             password += userChoice[Math.floor(Math.random() * userChoice.length)]
 
         }
-    generatePassword.style.display = "none";
-        document.getElementById("passwordHolder").style.display = "none";
+        generatePassword.style.display = "none";
+
+        for (q = 0; q < document.getElementsByClassName("fadeAnimation").length - 1; q++) {
+            document.getElementsByClassName("fadeAnimation")[q].style.display = "none";
+        }
         document.getElementById("passwordSpace").style.display = "inline";
         for (let j = 0; j < userdigits.value; j++) {
             passwordholder.textContent += password[Math.floor(Math.random() * password.length)]
-            console.log(passwordholder)
-            console.log(typeof userdigits.value);
+
+
         }
+
+        document.getElementById("buttonsHolder").appendChild(backButton);
+        backButton.textContent = "Nueva Contraseña";
+        backButton.style.marginLeft = "15px";
+        backButton.className = "btn btn-default btn-light space fadeAnimation"
+        backButton.style.display = "block";
     }
     else if (userdigits.value < 1) {
         alert("escribe un digito mayor que 1 o igual")
@@ -55,5 +68,19 @@ generatePassword.addEventListener("click", function () {
     else if (!userdigits.value || typeof userdigits.value == "string") {
         alert("escribe un digito!")
     }
+
+
+
+
+});
+
+backButton.addEventListener("click", function () {
+    generatePassword.style.display = "block";
+
+    for (q = 0; q < document.getElementsByClassName("fadeAnimation").length - 1; q++) {
+        document.getElementsByClassName("fadeAnimation")[q].style.display = "block";
+    }
+    document.getElementById("passwordSpace").style.display = "none";
+backButton.style.display = "none"
 
 });

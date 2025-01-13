@@ -1,91 +1,115 @@
+// password properties
 let lowercase = "abcdefghijklmnopqrstvwxyz";
 let uppercase = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
 let numbers = "1234567890";
 let symbols = "!@#$%^&*()_+=";
+
+// password attributes array
 let userChoice = [];
-let passwordholder = document.getElementById("generatedPassword");
+// display password p element target
+let displayedPassword = document.getElementById("generatedPassword");
+// digits input target
 let userdigits = document.getElementById("userDigits");
+// password information array
 let password = [];
+// password button target
 const generatePassword = document.getElementById("submitPassword");
+// backbutton element 
 let backButton = document.createElement("button");
 
-
+// submit button click event listener
 generatePassword.addEventListener("click", function () {
 
-    const minusculas = document.getElementById("minusculas");
-    const mayusculas = document.getElementById("mayusculas");
-    const numeros = document.getElementById("numeros");
-    const simbolos = document.getElementById("simbolos");
+    // attributes checkboxes targets
+    const lowercaseCheck = document.getElementById("lowercaseCheck");
+    const uppercaseCheck = document.getElementById("uppercaseCheck");
+    const numbersCheck = document.getElementById("numbersCheck");
+    const symbolsCheck = document.getElementById("symbolsCheck");
 
+    // attribute checkboxes if statements
     if (userdigits.value >= 1) {
-
-        if (minusculas.checked) {
+        // if lowercase checkbox is checked than add lowercase string value to user choice value
+        if (lowercaseCheck.checked) {
             userChoice += lowercase
         }
-        if (mayusculas.checked) {
+        // if uppercase checkbox is checked than add uppercase string value to user choice value
+        if (uppercaseCheck.checked) {
             userChoice += uppercase
         }
-        if (numeros.checked) {
+        // if numbers checkbox is checked than add numbers string value to user choice value
+        if (numbersCheck.checked) {
             userChoice += numbers
         }
-        if (simbolos.checked) {
+        // if symbols checkbox is click than add symbols string value to user choice value
+        if (symbolsCheck.checked) {
             userChoice += symbols
         }
 
-        else if (!minusculas.checked && !mayusculas.checked && !numeros.checked && !simbolos.checked) {
-            alert("Elige un atributo!")
+        // if is not check than alert user screen with 'message'
+        else if (!lowercaseCheck.checked && !uppercaseCheck.checked && !numbersCheck.checked && !symbolsCheck.checked) {
+            alert("CHOOSE AN ATTRIBUTE!")
             reload()
 
         }
-
+        // for loop for randomizing the password checked properties values inside the password let variable 
         for (let i = 0; i < userChoice.length - 1; i++) {
             password += userChoice[Math.floor(Math.random() * userChoice.length)]
 
         }
-        generatePassword.style.display = "none";
 
+        // setting  no display to password options 
+        generatePassword.style.display = "none";
+        // for loop to target all elements with 'fadeAnimation' class and setting no display on it 
         for (q = 0; q < document.getElementsByClassName("fadeAnimation").length - 1; q++) {
             document.getElementsByClassName("fadeAnimation")[q].style.display = "none";
         }
+
+        // for loop selection at random password values times the value of userdigits
         document.getElementById("passwordSpace").style.display = "inline";
         for (let j = 0; j < userdigits.value; j++) {
-            passwordholder.textContent += password[Math.floor(Math.random() * password.length)]
-
-
+            displayedPassword.textContent += password[Math.floor(Math.random() * password.length)]
         }
 
+        // Backbutton properties 
         document.getElementById("buttonsHolder").appendChild(backButton);
-        backButton.textContent = "Nueva Contraseña";
+        backButton.textContent = "Generate New Password";
         backButton.style.marginLeft = "15px";
         backButton.className = "btn btn-default btn-light space"
         backButton.style.display = "block";
     }
+
+    // if userdigits input value is less than 1 alert user 'message'
     else if (userdigits.value < 1) {
-        alert("escribe un digito mayor que 1 o igual")
+        alert("Write digit number greater or equal to 1")
     }
+
+    // if userdigits is empty or type equals a string than alert user this 'message'
     else if (!userdigits.value || typeof userdigits.value == "string") {
-        alert("escribe un digito!")
+        alert("Write a digit number!")
     }
 
 
 
 
 });
-
+// backbutton click event listener
 backButton.addEventListener("click", function () {
+    // set userchoice variable, password and displayedPassword values empty
     userChoice = [];
     password = [];
-    passwordholder.textContent = '';
-
+    displayedPassword.textContent = '';
+    // sets generate password button display
     generatePassword.style.display = "block";
-
-    for (q = 0; q < document.getElementsByClassName("fadeAnimation").length - 1; q++) {
+    // targets all elements with fadeAnimation class to set display
+    for (q = 0; q < document.getElementsByClassName("fadeAnimation").length; q++) {
         document.getElementsByClassName("fadeAnimation")[q].style.display = "block";
     }
+    // sets password no display
     document.getElementById("passwordSpace").style.display = "none";
     backButton.style.display = "none";
 
 
-   
+
 
 });
+

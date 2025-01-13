@@ -11,9 +11,7 @@ let backButton = document.createElement("button");
 
 
 generatePassword.addEventListener("click", function () {
-    userChoice.length = 0;
-    password.length = 0;
-    passwordholder.textContent = '';
+
     const minusculas = document.getElementById("minusculas");
     const mayusculas = document.getElementById("mayusculas");
     const numeros = document.getElementById("numeros");
@@ -59,7 +57,7 @@ generatePassword.addEventListener("click", function () {
         document.getElementById("buttonsHolder").appendChild(backButton);
         backButton.textContent = "Nueva Contraseña";
         backButton.style.marginLeft = "15px";
-        backButton.className = "btn btn-default btn-light space fadeAnimation"
+        backButton.className = "btn btn-default btn-light space"
         backButton.style.display = "block";
     }
     else if (userdigits.value < 1) {
@@ -75,12 +73,19 @@ generatePassword.addEventListener("click", function () {
 });
 
 backButton.addEventListener("click", function () {
+    userChoice = [];
+    password = [];
+    passwordholder.textContent = '';
+
     generatePassword.style.display = "block";
 
     for (q = 0; q < document.getElementsByClassName("fadeAnimation").length - 1; q++) {
         document.getElementsByClassName("fadeAnimation")[q].style.display = "block";
     }
     document.getElementById("passwordSpace").style.display = "none";
-backButton.style.display = "none"
+    backButton.style.display = "none";
+
+
+   
 
 });

@@ -16,6 +16,8 @@ let password = [];
 const generatePassword = document.getElementById("submitPassword");
 // backbutton element 
 let backButton = document.createElement("button");
+// copybutton element
+const copybutton = document.getElementById("copybutton");
 
 // submit button click event listener
 generatePassword.addEventListener("click", function () {
@@ -77,6 +79,70 @@ generatePassword.addEventListener("click", function () {
         backButton.className = "btn btn-default btn-light space"
         backButton.style.display = "block";
     }
+
+    // if userdigits input value is less than 1 alert user 'message'
+    else if (userdigits.value < 1) {
+        alert("Write digit number greater or equal to 1")
+    }
+
+    // if userdigits is empty or type equals a string than alert user this 'message'
+    else if (!userdigits.value || typeof userdigits.value == "string") {
+        alert("Write a digit number!")
+    }
+
+
+
+
+});
+// backbutton click event listener
+backButton.addEventListener("click", function () {
+    // set userchoice variable, password and displayedPassword values empty
+    userChoice = [];
+    password = [];
+    displayedPassword.textContent = '';
+    // sets generate password button display
+    generatePassword.style.display = "block";
+    // targets all elements with fadeAnimation class to set display
+    for (q = 0; q < document.getElementsByClassName("fadeAnimation").length; q++) {
+        document.getElementsByClassName("fadeAnimation")[q].style.display = "block";
+    }
+    // sets password no display
+    document.getElementById("passwordSpace").style.display = "none";
+    backButton.style.display = "none";
+
+
+
+
+});
+
+
+// copy button function
+function copyText() {
+    // Get the text content of the paragraph
+    const text = displayedPassword.textContent;
+    const copyImage = document.createElement("img");
+    copyImage.src = "./copy button image.png";
+    copyImage.style.width = "20px";
+    copyImage.style.height = "20px"
+
+    // Use the Clipboard API to copy the text
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            // Show the "Copied" message
+            const message = "Copied";
+            copybutton.textContent = message
+
+
+            // Hide the "Copied" message after 2 seconds
+            setTimeout(() => {
+                copybutton.textContent = "";
+                copybutton.appendChild(copyImage);
+            }, 1000);
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+}
 
     // if userdigits input value is less than 1 alert user 'message'
     else if (userdigits.value < 1) {

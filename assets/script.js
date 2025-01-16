@@ -72,12 +72,16 @@ generatePassword.addEventListener("click", function () {
             displayedPassword.textContent += password[Math.floor(Math.random() * password.length)]
         }
 
+
+        displayedPassword.appendChild(copybutton);
         // Backbutton properties 
         document.getElementById("buttonsHolder").appendChild(backButton);
         backButton.textContent = "Generate New Password";
-        backButton.style.marginLeft = "15px";
-        backButton.className = "btn btn-default btn-light space"
+        backButton.style.marginLeft = "10px";
+        backButton.style.marginTop = "15px";
         backButton.style.display = "block";
+        backButton.className = "btn btn-default btn-light";
+
     }
 
     // if userdigits input value is less than 1 alert user 'message'
@@ -114,8 +118,9 @@ backButton.addEventListener("click", function () {
 
 
 });
-
+// makes displayedPassword let variable appendchild copybutton variable
 displayedPassword.appendChild(copybutton);
+
 // copy button function
 function copyText() {
     // Get the text content of the paragraph

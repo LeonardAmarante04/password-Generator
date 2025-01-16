@@ -144,38 +144,3 @@ function copyText() {
         });
 }
 
-    // if userdigits input value is less than 1 alert user 'message'
-    else if (userdigits.value < 1) {
-        alert("Write digit number greater or equal to 1")
-    }
-
-    // if userdigits is empty or type equals a string than alert user this 'message'
-    else if (!userdigits.value || typeof userdigits.value == "string") {
-        alert("Write a digit number!")
-    }
-
-
-
-
-});
-// backbutton click event listener
-backButton.addEventListener("click", function () {
-    // set userchoice variable, password and displayedPassword values empty
-    userChoice = [];
-    password = [];
-    displayedPassword.textContent = '';
-    // sets generate password button display
-    generatePassword.style.display = "block";
-    // targets all elements with fadeAnimation class to set display
-    for (q = 0; q < document.getElementsByClassName("fadeAnimation").length; q++) {
-        document.getElementsByClassName("fadeAnimation")[q].style.display = "block";
-    }
-    // sets password no display
-    document.getElementById("passwordSpace").style.display = "none";
-    backButton.style.display = "none";
-
-
-
-
-});
-

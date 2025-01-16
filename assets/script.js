@@ -115,7 +115,7 @@ backButton.addEventListener("click", function () {
 
 });
 
-
+displayedPassword.appendChild(copybutton);
 // copy button function
 function copyText() {
     // Get the text content of the paragraph

@@ -3,7 +3,6 @@ let lowercase = "abcdefghijklmnopqrstvwxyz";
 let uppercase = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
 let numbers = "1234567890";
 let symbols = "!@#$%^&*()_+=";
-
 // password attributes array
 let userChoice = [];
 // display password p element target
@@ -18,6 +17,8 @@ const generatePassword = document.getElementById("submitPassword");
 let backButton = document.createElement("button");
 // copybutton element
 const copybutton = document.getElementById("copybutton");
+// saved password array 
+let savedPasswords = [];
 
 // submit button click event listener
 generatePassword.addEventListener("click", function () {
@@ -71,7 +72,8 @@ generatePassword.addEventListener("click", function () {
         for (let j = 0; j < userdigits.value; j++) {
             displayedPassword.textContent += password[Math.floor(Math.random() * password.length)]
         }
-
+        document.getElementById("lastPasswordSection").style.display = "none";
+        document.getElementById("lastenPasswordHolder").style.display = "none";
 
         displayedPassword.appendChild(copybutton);
         // Backbutton properties 
@@ -81,6 +83,28 @@ generatePassword.addEventListener("click", function () {
         backButton.style.marginTop = "15px";
         backButton.style.display = "block";
         backButton.className = "btn btn-default btn-light";
+
+
+
+
+        if (savedPasswords.length >= 9) {
+            savedPasswords.splice(9, 1);
+            savedPasswords.splice(0, 0, displayedPassword.textContent);
+            console.log(savedPasswords)
+        }
+
+        else {
+            savedPasswords.push(displayedPassword.textContent);
+            console.log(savedPasswords);
+        }
+
+
+        localStorage.setItem("passwordData", JSON.stringify(savedPasswords))
+        let liPasswordDisplay = document.createElement("li");
+        liPasswordDisplay.textContent =displayedPassword.textContent;
+        document.getElementById("lastenPasswordHolder").appendChild(liPasswordDisplay);
+        liPasswordDisplay.style.color = "white";
+        
 
     }
 
@@ -112,7 +136,11 @@ backButton.addEventListener("click", function () {
     }
     // sets password no display
     document.getElementById("passwordSpace").style.display = "none";
+    document.getElementById("lastPasswordSection").style.display = "block";
+    document.getElementById("lastenPasswordHolder").style.display = "block";
     backButton.style.display = "none";
+
+
 
 
 
@@ -149,3 +177,24 @@ function copyText() {
         });
 }
 
+
+
+let AllpassworDatastring = localStorage.getItem("passwordData");
+
+let AllpassworData = JSON.parse(AllpassworDatastring);
+console.log(AllpassworData);
+function passwordHistory() {
+    for (l = 0; l < AllpassworData.length; l++) {
+        let AllpassworDataloop = AllpassworData[l];
+        let savedpasswordsli = document.createElement("li");
+        savedpasswordsli.marginTop = "10px";
+        savedpasswordsli.textContent = AllpassworDataloop;
+        document.getElementById("lastenPasswordHolder").appendChild(savedpasswordsli);
+        savedpasswordsli.style.color = "white";
+
+
+
+    };
+}
+passwordHistory();
+savedPasswords = AllpassworData;

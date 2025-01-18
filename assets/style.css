@@ -93,3 +93,7 @@ h1 {
 .fadeAnimation {
   animation: fadeIn 5s ease-in-out;
 }
+
+li {
+color:white;
+}
